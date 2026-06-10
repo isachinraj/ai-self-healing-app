@@ -1,0 +1,7 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.heading { font-size: 2rem; margin-bottom: 0.5rem; }
+.subtext { color: #475569; margin-bottom: 1rem; }
+.featureList { list-style: none; padding: 0; color: #0f172a; }

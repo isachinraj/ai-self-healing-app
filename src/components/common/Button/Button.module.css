@@ -1,0 +1,9 @@
+.btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn:hover { opacity: 0.95; }
