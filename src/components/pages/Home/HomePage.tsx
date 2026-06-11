@@ -1,3 +1,4 @@
+typescript
 import { useEffect } from "react";
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectCurrentUser, selectIsAuthenticated } from '@components/auth/authSelectors';
@@ -5,9 +6,14 @@ import { selectCurrentUser, selectIsAuthenticated } from '@components/auth/authS
 import styles from './HomePage.module.css';
 import { API_ENDPOINT } from '@/config/constants';
 
+const triggerAppErrorAlert = (error: ErrorEvent) => {
+  // Dedicated trigger function for app-error-to-function-trigger alert
+  console.error('[app-error-trigger] An error occurred:', error?.message ?? error);
+};
+
 const handleAppError = (error: ErrorEvent) => {
   // Trigger function when an error happens in the app
-  console.error('[app-error-trigger] An error occurred:', error?.message ?? error);
+  triggerAppErrorAlert(error);
 };
 
 const HomePage = () => {
