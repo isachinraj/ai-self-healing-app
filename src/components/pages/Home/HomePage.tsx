@@ -5,6 +5,10 @@ import { selectCurrentUser, selectIsAuthenticated } from '@components/auth/authS
 import styles from './HomePage.module.css';
 import { API_ENDPOINT } from '@/config/constants';
 
+const triggerOnError = (error: ErrorEvent) => {
+  console.error('[app-error-to-function-trigger] Error detected:', error.message, error);
+};
+
 const HomePage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useAppSelector(selectCurrentUser);
@@ -12,11 +16,17 @@ const HomePage = () => {
   // dev: avoid logging Vite-only globals during tests
   console.log('API_ENDPOINT', API_ENDPOINT);
 
-  
-  // useEffect(() => {
-  //   throw new Error("Test crash from React app");
-  // }, []);
+  useEffect(() => {
+    const handleError = (error: ErrorEvent) => {
+      triggerOnError(error);
+    };
 
+    window.addEventListener('error', handleError);
+
+    return () => {
+      window.removeEventListener('error', handleError);
+    };
+  }, []);
 
   return (
     <main className={styles.container}>
