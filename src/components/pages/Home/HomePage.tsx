@@ -12,12 +12,6 @@ const HomePage = () => {
   // dev: avoid logging Vite-only globals during tests
   console.log('API_ENDPOINT', API_ENDPOINT);
 
-  
-  useEffect(() => {
-    throw new Error("Test crash from React app");
-  }, []);
-
-
   return (
     <main className={styles.container}>
       <h1 className={styles.heading}>Hello, World! 👋</h1>
