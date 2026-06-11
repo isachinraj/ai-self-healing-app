@@ -18,11 +18,27 @@ const HomePage = () => {
   console.log('API_ENDPOINT', API_ENDPOINT);
 
   useEffect(() => {
+    const handleWindowError = (event: ErrorEvent) => {
+      handleAppError(event.error instanceof Error ? event.error : new Error(event.message));
+    };
+
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      handleAppError(event.reason instanceof Error ? event.reason : new Error(String(event.reason)));
+    };
+
+    window.addEventListener('error', handleWindowError);
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+
     try {
       throw new Error("Test crash from React app");
     } catch (error) {
       handleAppError(error as Error);
     }
+
+    return () => {
+      window.removeEventListener('error', handleWindowError);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+    };
   }, []);
 
   return (
