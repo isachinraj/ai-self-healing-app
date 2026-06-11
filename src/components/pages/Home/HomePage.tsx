@@ -5,10 +5,6 @@ import { selectCurrentUser, selectIsAuthenticated } from '@components/auth/authS
 import styles from './HomePage.module.css';
 import { API_ENDPOINT } from '@/config/constants';
 
-const triggerOnError = (error: ErrorEvent) => {
-  console.error('[app-error-to-function-trigger] Error detected:', error.message, error);
-};
-
 const HomePage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useAppSelector(selectCurrentUser);
@@ -16,27 +12,11 @@ const HomePage = () => {
   // dev: avoid logging Vite-only globals during tests
   console.log('API_ENDPOINT', API_ENDPOINT);
 
+  
   useEffect(() => {
-    const handleError = (error: ErrorEvent) => {
-      triggerOnError(error);
-    };
-
-    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      const syntheticError = new ErrorEvent('error', {
-        message: event.reason instanceof Error ? event.reason.message : String(event.reason),
-        error: event.reason,
-      });
-      triggerOnError(syntheticError);
-    };
-
-    window.addEventListener('error', handleError);
-    window.addEventListener('unhandledrejection', handleUnhandledRejection);
-
-    return () => {
-      window.removeEventListener('error', handleError);
-      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
-    };
+    throw new Error("Test crash from React app");
   }, []);
+
 
   return (
     <main className={styles.container}>
