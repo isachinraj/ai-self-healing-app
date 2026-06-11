@@ -1,4 +1,4 @@
-//import { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectCurrentUser, selectIsAuthenticated } from '@components/auth/authSelectors';
 
@@ -13,9 +13,9 @@ const HomePage = () => {
   console.log('API_ENDPOINT', API_ENDPOINT);
 
   
-  // useEffect(() => {
-  //   throw new Error("Test crash from React app");
-  // }, []);
+  useEffect(() => {
+    throw new Error("Test crash from React app");
+  }, []);
 
 
   return (
