@@ -15,8 +15,8 @@ const getEnvironmentVariables = (mode: string) => {
   // mode === 'production' — any CI build (dev / qa / preprod / prod)
   // Azure Replace Tokens task swaps #{TOKEN}# per environment at deploy time
   return {
-    VITE_APP_ENV:    '#{APP_ENV}#',
-    VITE_APP_URL:    '#{APP_URL}#',
+    VITE_APP_ENV:    'production',
+    VITE_APP_URL:    'https://gray-bay-0a190e010.7.azurestaticapps.net',
     VITE_API_ENDPOINT:    '#{API_ENDPOINT}#',
   }
 }
