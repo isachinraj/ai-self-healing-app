@@ -8,12 +8,7 @@ import { API_ENDPOINT } from '@/config/constants';
 
 const triggerAppErrorAlert = (error: ErrorEvent) => {
   // Dedicated trigger function for app-error-to-function-trigger alert
-  console.error('[app-error-trigger] An error occurred:', error?.message ?? error);
-};
-
-const handleAppError = (error: ErrorEvent) => {
-  // Trigger function when an error happens in the app
-  triggerAppErrorAlert(error);
+  console.error('[app-error-to-function-trigger] An error occurred:', error?.message ?? error);
 };
 
 const HomePage = () => {
@@ -24,6 +19,11 @@ const HomePage = () => {
   console.log('API_ENDPOINT', API_ENDPOINT);
 
   useEffect(() => {
+    const handleAppError = (error: ErrorEvent) => {
+      // Trigger function when an error happens in the app
+      triggerAppErrorAlert(error);
+    };
+
     window.addEventListener('error', handleAppError);
     return () => {
       window.removeEventListener('error', handleAppError);
