@@ -1,15 +1,9 @@
-typescript
 import { useEffect } from "react";
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectCurrentUser, selectIsAuthenticated } from '@components/auth/authSelectors';
 
 import styles from './HomePage.module.css';
 import { API_ENDPOINT } from '@/config/constants';
-
-const triggerAppErrorAlert = (error: ErrorEvent) => {
-  // Dedicated trigger function for app-error-to-function-trigger alert
-  console.error('[app-error-to-function-trigger] An error occurred:', error?.message ?? error);
-};
 
 const HomePage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -18,17 +12,11 @@ const HomePage = () => {
   // dev: avoid logging Vite-only globals during tests
   console.log('API_ENDPOINT', API_ENDPOINT);
 
-  useEffect(() => {
-    const handleAppError = (error: ErrorEvent) => {
-      // Trigger function when an error happens in the app
-      triggerAppErrorAlert(error);
-    };
+  
+  // useEffect(() => {
+  //   throw new Error("Test crash from React app");
+  // }, []);
 
-    window.addEventListener('error', handleAppError);
-    return () => {
-      window.removeEventListener('error', handleAppError);
-    };
-  }, []);
 
   return (
     <main className={styles.container}>
