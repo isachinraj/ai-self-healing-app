@@ -1,0 +1,5 @@
+{
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://southcentralus-3.in.applicationinsights.azure.com https://southcentralus.livediagnostics.monitor.azure.com https://dc.services.visualstudio.com https://*.monitor.azure.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:;"
+  }
+}
