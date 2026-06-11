@@ -21,10 +21,20 @@ const HomePage = () => {
       triggerOnError(error);
     };
 
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      const syntheticError = new ErrorEvent('error', {
+        message: event.reason instanceof Error ? event.reason.message : String(event.reason),
+        error: event.reason,
+      });
+      triggerOnError(syntheticError);
+    };
+
     window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
 
     return () => {
       window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
     };
   }, []);
 
