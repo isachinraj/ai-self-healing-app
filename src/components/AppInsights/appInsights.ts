@@ -11,9 +11,9 @@ appInsights.loadAppInsights();
 // Fallback: capture unhandled JS errors not caught by React ErrorBoundary
 window.onerror = function (
   message: string | Event,
-  source?: string,
-  lineno?: number,
-  colno?: number,
+  _source?: string,
+  _lineno?: number,
+  _colno?: number,
   error?: Error
 ) {
   appInsights.trackException({ exception: error || new Error(String(message)) });
