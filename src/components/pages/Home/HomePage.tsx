@@ -5,18 +5,25 @@ import { selectCurrentUser, selectIsAuthenticated } from '@components/auth/authS
 import styles from './HomePage.module.css';
 import { API_ENDPOINT } from '@/config/constants';
 
+const onAppError = (error: Error) => {
+  // Trigger error handling logic here (e.g., logging service, monitoring, etc.)
+  console.error('[App Error Handler]', error.message);
+};
+
 const HomePage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useAppSelector(selectCurrentUser);
-  
+
   // dev: avoid logging Vite-only globals during tests
   console.log('API_ENDPOINT', API_ENDPOINT);
 
-  
   useEffect(() => {
-    throw new Error("Test crash from React app");
+    try {
+      // App initialization logic
+    } catch (error) {
+      onAppError(error instanceof Error ? error : new Error(String(error)));
+    }
   }, []);
-
 
   return (
     <main className={styles.container}>
