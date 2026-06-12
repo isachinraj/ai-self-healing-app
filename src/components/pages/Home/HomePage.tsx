@@ -18,11 +18,21 @@ const HomePage = () => {
   console.log('API_ENDPOINT', API_ENDPOINT);
 
   useEffect(() => {
-    try {
-      // App initialization logic
-    } catch (error) {
-      onAppError(error instanceof Error ? error : new Error(String(error)));
-    }
+    const handleError = (event: ErrorEvent) => {
+      onAppError(event.error instanceof Error ? event.error : new Error(event.message));
+    };
+
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      onAppError(event.reason instanceof Error ? event.reason : new Error(String(event.reason)));
+    };
+
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+    };
   }, []);
 
   return (
