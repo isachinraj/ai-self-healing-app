@@ -3,7 +3,6 @@ import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectCurrentUser, selectIsAuthenticated } from '@components/auth/authSelectors';
 
 import styles from './HomePage.module.css';
-import { API_ENDPOINT } from '@/config/constants';
 
 const onAppError = (error: Error) => {
   console.error('[App Error Handler]', error.message);
@@ -12,18 +11,16 @@ const onAppError = (error: Error) => {
 const HomePage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useAppSelector(selectCurrentUser);
-  
-  // dev: avoid logging Vite-only globals during tests
-  console.log('API_ENDPOINT', API_ENDPOINT);
 
   useEffect(() => {
-    try {
-      throw new Error("Test crash from React app");
-    } catch (error) {
-      if (error instanceof Error) {
-        onAppError(error);
-      }
-    }
+    const handleWindowError = (event: ErrorEvent) => {
+      onAppError(new Error(event.message));
+    };
+
+    window.addEventListener('error', handleWindowError);
+    return () => {
+      window.removeEventListener('error', handleWindowError);
+    };
   }, []);
 
   return (
